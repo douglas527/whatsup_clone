@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "359738212053",
+    "project_id": "whatsup--clone",
+    "storage_bucket": "whatsup--clone.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:359738212053:android:5dfdaddd75177b53c4ac5c",
+        "android_client_info": {
+          "package_name": "com.example.whatsup_clone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "359738212053-a4phu08v2dkg2934v84ehdeundp780f5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTvT7XAoeXorXkdV4cKQzZDThZ8By0UEQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "359738212053-a4phu08v2dkg2934v84ehdeundp780f5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
