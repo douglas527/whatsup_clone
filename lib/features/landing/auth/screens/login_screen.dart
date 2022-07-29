@@ -100,6 +100,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   text: 'Next',
                 ),
               ),
+              const SizedBox(
+                height: 15,
+              )
             ],
           ),
         ),

@@ -15,51 +15,53 @@ class LandingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const SizedBox(
-              height: 50,
-            ),
-            const Text(
-              'Welcome to Whatsapp',
-              style: TextStyle(
-                fontSize: 33.0,
-                fontWeight: FontWeight.w600,
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const SizedBox(
+                height: 50,
               ),
-            ),
-            SizedBox(height: size.height / 9),
-            Image.asset(
-              'assets/bg.png',
-              height: 340,
-              width: 340,
-              color: tabColor,
-            ),
-            SizedBox(height: size.height / 9),
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: const Text(
-                'Read our Privacy Policy Tap "Agree and Continue" to accept the terms and conditions.',
+              const Text(
+                'Welcome to Whatsapp',
                 style: TextStyle(
-                  fontSize: 15.0,
+                  fontSize: 33.0,
                   fontWeight: FontWeight.w600,
-                  color: greyColor,
                 ),
-                textAlign: TextAlign.center,
               ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            SizedBox(
-              width: size.width * 0.75,
-              child: CustomButton(
-                text: 'Agree and Continue',
-                onPressed: () => navigateLoginScreen(context),
+              SizedBox(height: size.height / 9),
+              Image.asset(
+                'assets/bg.png',
+                height: 340,
+                width: 340,
+                color: tabColor,
               ),
-            ),
-          ],
+              SizedBox(height: size.height / 9),
+              Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: const Text(
+                  'Read our Privacy Policy Tap "Agree and Continue" to accept the terms and conditions.',
+                  style: TextStyle(
+                    fontSize: 15.0,
+                    fontWeight: FontWeight.w600,
+                    color: greyColor,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              SizedBox(
+                width: size.width * 0.75,
+                child: CustomButton(
+                  text: 'Agree and Continue',
+                  onPressed: () => navigateLoginScreen(context),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

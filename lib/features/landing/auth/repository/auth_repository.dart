@@ -1,9 +1,12 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:whatsup_clone/commons/utils.dart';
 import 'package:whatsup_clone/features/landing/auth/otp_screen.dart';
+import 'package:whatsup_clone/features/landing/auth/screens/user_information.dart';
 
 final authRepositoryProvider = Provider(
   (ref) => AuthRepository(
@@ -36,6 +39,24 @@ class AuthRepository {
           }),
           codeAutoRetrievalTimeout: (String verificationId) {});
     } on FirebaseException catch (e) {
+      showSnackBar(context: context, content: e.message!);
+    }
+  }
+
+  void verifyOTP({
+    required BuildContext context,
+    required String verificationId,
+    required userOTP,
+  }) async {
+    try {
+      PhoneAuthCredential credential = PhoneAuthProvider.credential(
+        verificationId: verificationId,
+        smsCode: userOTP,
+      );
+      await auth.signInWithCredential(credential);
+      Navigator.restorablePushNamedAndRemoveUntil(
+          context, UserInformation.routeName, (route) => false);
+    } on FirebaseAuthException catch (e) {
       showSnackBar(context: context, content: e.message!);
     }
   }
