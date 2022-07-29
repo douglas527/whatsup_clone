@@ -1,9 +1,12 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:whatsup_clone/commons/repositories/common_firebase_storage_repository.dart';
 import 'package:whatsup_clone/commons/utils.dart';
 import 'package:whatsup_clone/features/landing/auth/otp_screen.dart';
 import 'package:whatsup_clone/features/landing/auth/screens/user_information.dart';
@@ -58,6 +61,25 @@ class AuthRepository {
           context, UserInformation.routeName, (route) => false);
     } on FirebaseAuthException catch (e) {
       showSnackBar(context: context, content: e.message!);
+    }
+  }
+
+  void saveUserDataToFirebase(
+      {required String name,
+      required File? profilePic,
+      required ProviderRef ref,
+      required BuildContext context}) async {
+    try {
+      String uid = auth.currentUser!.uid;
+      String photoUrl =
+          'https://images.pexels.com/photos/4846097/pexels-photo-4846097.jpeg?auto=compress&cs=tinysrgb&w=400';
+      if (profilePic != null) {
+        ref.read(commonFirebaseStorageRepositoryProvider).storeFileToFirebase(
+              'profilePics$uid',
+            );
+      }
+    } catch (e) {
+      showSnackBar(context: context, content: e.toString());
     }
   }
 }
