@@ -10,6 +10,8 @@ import 'package:whatsup_clone/commons/repositories/common_firebase_storage_repos
 import 'package:whatsup_clone/commons/utils.dart';
 import 'package:whatsup_clone/features/landing/auth/otp_screen.dart';
 import 'package:whatsup_clone/features/landing/auth/screens/user_information.dart';
+import 'package:whatsup_clone/models/user_model.dart';
+import 'package:whatsup_clone/screens/mobile_layout_screen.dart';
 
 final authRepositoryProvider = Provider(
   (ref) => AuthRepository(
@@ -74,10 +76,25 @@ class AuthRepository {
       String photoUrl =
           'https://images.pexels.com/photos/4846097/pexels-photo-4846097.jpeg?auto=compress&cs=tinysrgb&w=400';
       if (profilePic != null) {
-        ref.read(commonFirebaseStorageRepositoryProvider).storeFileToFirebase(
+        photoUrl = await ref
+            .read(commonFirebaseStorageRepositoryProvider)
+            .storeFileToFirebase(
               'profilePics$uid',
+              profilePic,
             );
       }
+      var user = UserModel(
+          name: name,
+          groupId: [],
+          phoneNumber: auth.currentUser!.uid,
+          uid: uid,
+          profilePic: photoUrl,
+          isOnLine: true);
+      await firestore.collection('users').doc(uid).set(user.toMap());
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => const MobileLayoutScreen()),
+          (route) => false);
     } catch (e) {
       showSnackBar(context: context, content: e.toString());
     }
